@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class GraphAlgorithms {
 
@@ -11,7 +8,7 @@ public class GraphAlgorithms {
     //Visited array to keep track of visited nodes
     List<Integer>visited = new ArrayList<>();
 
-    //Queue to keep track of vertices durin BFS
+    //Queue to keep track of vertices during BFS
     Queue<Integer> queue = new LinkedList<>();
 
     //Number of vertices
@@ -43,6 +40,17 @@ public class GraphAlgorithms {
         }
     }
 
+    //2. Depth First Search Traversal
+    public void dfs(int i){
+        visited.set(i, 1);
+        System.out.print(i + "-> ");
+        for(Integer neighbor : adj.get(i)){
+            if(visited.get(neighbor) != 1){
+                dfs(neighbor);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         int vertices = 5;
         GraphAlgorithms graph = new GraphAlgorithms(vertices);
@@ -59,9 +67,22 @@ public class GraphAlgorithms {
             System.out.println(graph.adj.get(i).toString());
         }
 
+        //BFS Traversal
+        System.out.println("\n");
         System.out.println("The BFS traversal of the graph is: ");
         graph.queue.add(0);
         graph.bfs();
+
+        //DFS Traversal
+        System.out.println("\n");
+        System.out.println("The DFS traversal of the graph is: ");
+        //Reinitialise the visited array for the DFS traversal
+        Collections.fill(graph.visited, 0);
+        for(int i = 0; i < graph.visited.size(); i++){
+            if(graph.visited.get(i) != 1){
+                graph.dfs(i);
+            }
+        }
 
     }
 
