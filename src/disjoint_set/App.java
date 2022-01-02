@@ -20,6 +20,7 @@ public class App {
         uf.union(9, 4);
         System.out.println(uf.connected(4, 9)); // true
 
+        System.out.println("------------------------------------------------------------------");
         //QuickUnion Implementation
         QuickUnion qu = new QuickUnion(10);
         // 1-2-5-6-7 3-8-9 4
@@ -35,5 +36,22 @@ public class App {
         // 1-2-5-6-7 3-8-9-4
         qu.union(9, 4);
         System.out.println(qu.connected(4, 9)); // true
+
+        System.out.println("------------------------------------------------------------------");
+        //This optimisation works on top of QuickUnion approach
+        UnionRank ufr = new UnionRank(10);
+        // 1-2-5-6-7 3-8-9 4
+        ufr.union(1, 2);
+        ufr.union(2, 5);
+        ufr.union(5, 6);
+        ufr.union(6, 7);
+        ufr.union(3, 8);
+        ufr.union(8, 9);
+        System.out.println(ufr.connected(1, 5)); // true
+        System.out.println(ufr.connected(5, 7)); // true
+        System.out.println(ufr.connected(4, 9)); // false
+        // 1-2-5-6-7 3-8-9-4
+        ufr.union(9, 4);
+        System.out.println(ufr.connected(4, 9)); // true
     }
 }
